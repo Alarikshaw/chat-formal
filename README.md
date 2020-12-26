@@ -1,2 +1,3 @@
-# chat-formal
-Vue3+TypeScript+Vite
+# vue-next-template
+
+Vue3 + TypeScript + Vite
