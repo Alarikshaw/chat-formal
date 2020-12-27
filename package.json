@@ -1,6 +1,6 @@
 {
-  "name": "vue-plug-admin",
-  "version": "2.0.0-rc.11",
+  "name": "chat-form",
+  "version": "1.0.0-rc.03",
   "scripts": {
     "bootstrap": "yarn install",
     "start": "vite",
@@ -88,15 +88,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Alarikshaw/vue-next-template.git"
+    "url": "git+https://github.com/Alarikshaw/chat-formal.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Alarikshaw/vue-next-template/issues"
+    "url": "https://github.com/Alarikshaw/chat-formal/issues"
   },
-  "homepage": "https://github.com/Alarikshaw/vue-next-template",
+  "homepage": "https://github.com/Alarikshaw/chat-formal",
   "changelog": {
-    "bugsUrl": "https://github.com/Alarikshaw/vue-next-template/issues",
+    "bugsUrl": "https://github.com/Alarikshaw/chat-formal/issues",
     "emojis": true,
     "authorName": false,
     "authorEmail": false
