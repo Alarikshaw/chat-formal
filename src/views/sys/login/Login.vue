@@ -10,25 +10,20 @@
 
           <a-form class="mx-auto mt-10" :model="formData" :rules="formRules" ref="formRef">
             <a-form-item name="account">
-              <a-input size="large" v-model:value="formData.account" placeholder="username: chatForm" />
+              <a-input size="large" v-model:value="formData.account" placeholder="username" />
             </a-form-item>
             <a-form-item name="password">
               <a-input-password
                 size="large"
                 visibilityToggle
                 v-model:value="formData.password"
-                placeholder="password: 123456"
+                placeholder="password"
               />
             </a-form-item>
             <a-row>
               <a-col :span="12">
                 <a-form-item>
                   <a-checkbox v-model:checked="autoLogin" size="small">自动登录</a-checkbox>
-                </a-form-item>
-              </a-col>
-              <a-col :span="12">
-                <a-form-item :style="{ 'text-align': 'right' }">
-                  <a-button type="link" size="small">忘记密码</a-button>
                 </a-form-item>
               </a-col>
             </a-row>
@@ -72,7 +67,7 @@
       const autoLoginRef = ref(false);
       const { notification } = useMessage();
       const formData = reactive({
-        account: 'chatForm',
+        account: 'userName',
         password: '123456',
       });
 
@@ -81,9 +76,9 @@
       });
 
       const formRules = reactive({
-        account: [{ required: true, message: '123123', trigger: 'blur' }],
+        account: [{ required: true, message: '填写用户名', trigger: 'blur' }],
         password: [
-          { required: true, message: '123123', trigger: 'blur' },
+          { required: true, message: '输入密码', trigger: 'blur' },
         ],
       });
       async function handleLogin() {
@@ -135,8 +130,10 @@
   .login {
     position: relative;
     height: 100vh;
-    // background: url(../../../assets/images/login/login-bg.png) no-repeat;
+    min-width: 1200px;
+    background: url(../../../assets/images/login/bannerimgs.jpg) no-repeat;
     background-size: 100% 100%;
+
 
     &-mask {
       display: none;
@@ -153,9 +150,10 @@
       bottom: 60px;
       width: 400px;
       background: @white;
-      border: 10px solid rgba(255, 255, 255, 0.5);
-      border-width: 8px;
-      border-radius: 4px;
+    //   border: 10px solid rgba(255, 255, 255, 0.5);
+
+      border-width: 0;
+      border-radius: 10px;
       background-clip: padding-box;
       .respond-to(xlarge, { margin: 0 120px 0 50px});
 
@@ -170,7 +168,7 @@
         justify-content: center;
         align-items: center;
         .respond-to(xlarge, {
-        justify-content: flex-end;
+        // justify-content: flex-end;
           });
       }
 
@@ -180,6 +178,7 @@
         height: 100%;
         padding: 60px 0 40px 0;
         border: 1px solid #999;
+        border: none;
         border-radius: 2px;
 
         header {

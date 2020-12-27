@@ -4,7 +4,7 @@ export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
   '#009688',
   '#18bc9c',
   '#1E9FFF',
-  '#018ffb',
+  '#11a8cd',
   '#409eff',
   '#4e73df',
   '#e74c3c',

@@ -69,7 +69,6 @@ class User extends VuexModule {
   commitResetState(): void {
     this.userInfoState = null;
     this.tokenState = '';
-    console.log('被清空');
     this.roleListState = [];
   }
 
