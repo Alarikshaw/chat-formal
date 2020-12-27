@@ -96,8 +96,8 @@
           console.log('userInfo', userInfo)
           if (userInfo) {
             notification.success({
-              message: '123123123123',
-              description: '123123123',
+              message: '登录成功',
+              description: '欢迎回来',
               duration: 3,
             });
           }
