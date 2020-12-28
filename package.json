@@ -4,7 +4,7 @@
   "scripts": {
     "bootstrap": "yarn install",
     "start": "vite",
-    "init:starts": "yarn clean:cache && yarn starts",
+    "starts:init": "yarn clean:cache && yarn starts",
     "starts": "esno ./build/script/preserve.ts && cross-env NODE_ENV=development vite",
     "clean:cache": "rimraf node_modules/.cache/ && rimraf node_modules/.vite_opt_cache",
     "build": "cross-env NODE_ENV=production vite build && esno ./build/script/postBuild.ts",
