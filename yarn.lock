@@ -6767,8 +6767,8 @@ vfile@^4.0.0:
 
 vite-plugin-html@^1.0.0-beta.2:
   version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/vite-plugin-html/-/vite-plugin-html-1.0.0-beta.2.tgz#f30cdba4ca70469e62b770e32c407ce5d7f9b544"
-  integrity sha512-8d/jMcs4tI4Oyf7mG8VAArT9afJhbRbw/jljRutHBluUWgr4rzZsVpEsQIqnqbuElU5AECdovlLI52D50pE/OQ==
+  resolved "https://registry.npm.taobao.org/vite-plugin-html/download/vite-plugin-html-1.0.0-beta.2.tgz#f30cdba4ca70469e62b770e32c407ce5d7f9b544"
+  integrity sha1-8wzbpMpwRp5it3DjLEB85df5tUQ=
   dependencies:
     html-minifier-terser "^5.1.1"
     lodash "^4.17.20"
