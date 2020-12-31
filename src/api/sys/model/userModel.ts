@@ -2,7 +2,7 @@
  * 用户登录参数
  */
 export interface LoginParams {
-  username: string;
+  userName: string;
   password: string;
 }
 
@@ -38,7 +38,7 @@ export interface GetUserInfoByUserIdModel {
   // 用户id
   userId?: string | number;
   // 用户名
-  username?: string;
+  userName?: string;
   // 真实名字
   realName?: string;
   // 介绍

@@ -18,7 +18,7 @@ import { RoleEnum } from '/@/enums/roleEnum';
 import { setLocal, getLocal, setSession, getSession } from '/@/utils/helper/persistent';
 import { CacheTypeEnum, USER_INFO_KEY, ROLES_KEY, TOKEN_KEY } from '/@/enums/cacheEnum';
 import { useProjectSetting } from '/@/hooks/setting';
-import { GetRegister } from '/@/api';
+import { GetRegister, PostLogin } from '/@/api';
 export type UserInfo = Omit<GetUserInfoByUserIdModel, 'roles'>;
 const NAME = 'user';
 hotModuleUnregisterModule(NAME);
@@ -109,23 +109,22 @@ class User extends VuexModule {
     }
   ): Promise<GetUserInfoByUserIdModel | null> {
     try {
-      const { goHome = true, mode, ...loginParams } = params;
-      //   const data = await loginApi(loginParams, mode);
-
-      const { token, userId } = {
-        token: params.username,
-        userId: params.password,
+      const { goHome = true } = params;
+      console.log('params', params);
+      const reqParam = {
+        userName: params.userName,
+        password: params.password,
       };
+      const loginRes: any = await PostLogin(reqParam);
+      console.log('registerRes', loginRes);
       const resData = {
         userId: params.password,
       };
       // get user info
       const userInfo = await this.getUserInfoAction(resData);
       // save token
-      this.commitTokenState(token);
+      this.commitTokenState(loginRes.data.token);
 
-      // const name = FULL_PAGE_NOT_FOUND_ROUTE.name;
-      // name && router.removeRoute(name);
       goHome && (await router.replace(PageEnum.BASE_HOME));
       return userInfo;
     } catch (error) {
@@ -137,7 +136,6 @@ class User extends VuexModule {
   async getRegister(param: UserRegister): Promise<RepUserReg> {
     const registerRes: any = await GetRegister(param);
     if (registerRes.code === 0) {
-      console.log('registerRes', registerRes);
       this.commitTokenState(registerRes.data.token);
       await router.replace(PageEnum.BASE_HOME);
       return registerRes;

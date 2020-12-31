@@ -3,11 +3,6 @@
  */
 interface UserRegister {
   /**
-   * 注册时间
-   */
-  createTime: number;
-
-  /**
    * 注册密码
    */
   password: string;
@@ -16,6 +11,11 @@ interface UserRegister {
    * 注册用户名
    */
   userName: string;
+
+  /**
+   * 注册时间
+   */
+  createTime?: number;
 }
 
 /**

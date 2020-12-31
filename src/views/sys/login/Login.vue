@@ -27,11 +27,11 @@
             :rules="state.formRules"
             ref="formRef"
           >
-            <a-form-item name="username">
+            <a-form-item name="userName">
               <a-input
                 size="large"
-                v-model:value="state.formData.username"
-                placeholder="username"
+                v-model:value="state.formData.userName"
+                placeholder="userName"
               />
             </a-form-item>
             <a-form-item name="password">
@@ -59,7 +59,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref, unref, toRaw } from 'vue';
+import { defineComponent, reactive, ref, unref } from 'vue';
 import { Checkbox, Tabs } from 'ant-design-vue';
 
 import { Button } from '/@/components/Button';
@@ -83,12 +83,12 @@ export default defineComponent({
       titleType: 'login', // 当前状态
       btnText: '登录', // 按钮相应文字
       formData: {
-        username: 'username',
+        userName: 'userName',
         password: '123456',
       }, // 表单数据
       loading: false, // 加载状态
       formRules: {
-        username: [{ required: true, message: '填写用户名', trigger: 'blur' }],
+        userName: [{ required: true, message: '填写用户名', trigger: 'blur' }],
         password: [{ required: true, message: '输入密码', trigger: 'blur' }],
       }, // 表单校验
     };
@@ -140,13 +140,7 @@ export default defineComponent({
         return false;
       } else {
         try {
-          const userInfo = await userStore.login(
-            toRaw({
-              password: data.password,
-              username: data.username,
-            })
-          );
-          console.log('userInfo', userInfo);
+          const userInfo = await userStore.login(data);
           if (userInfo) {
             notification.success({
               message: '登录成功',
