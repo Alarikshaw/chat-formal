@@ -10,7 +10,6 @@ const LOGIN_PATH = PageEnum.BASE_LOGIN;
 const whitePathList: PageEnum[] = [LOGIN_PATH];
 export function createPermissionGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
-    console.log('是否');
     // 根据传入的路由先行判断是否进入首页或者进入404页面
     if (from.path === LOGIN_PATH && to.name === PAGE_NOT_FOUND_ROUTE.name) {
       next(PageEnum.BASE_HOME);
@@ -27,7 +26,6 @@ export function createPermissionGuard(router: Router) {
      * 获取用户token
      */
     const token = getToken();
-    console.log('per token', token, !token);
     if (!token) {
       // 如果无token，则规则自定
       // 一般是重定向登录页
@@ -50,7 +48,6 @@ export function createPermissionGuard(router: Router) {
       return;
     }
     const routes = await permissionStore.buildRoutesAction();
-    console.log('per routes', routes);
     routes.forEach((route) => {
       // router.addRoute(RootRoute.name!, route as RouteRecordRaw);
       router.addRoute(route as RouteRecordRaw);
@@ -64,7 +61,6 @@ export function createPermissionGuard(router: Router) {
   });
   router.afterEach((to) => {
     // 进入登录界面，并且清除用户相关信息
-    console.log('重置');
     if (to.path === LOGIN_PATH) {
       appStore.resumeAllState();
     }

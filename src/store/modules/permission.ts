@@ -90,8 +90,6 @@ class Permission extends VuexModule {
       if (!roles) return true;
       return roleList.some((role) => roles.includes(role));
     });
-    console.log('routes', routes);
-
     return routes;
   }
 }

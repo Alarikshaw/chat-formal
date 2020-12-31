@@ -29,7 +29,6 @@ const router = createRouter({
  */
 export function resetRouter() {
   const resetWhiteNameList = ['Login', REDIRECT_NAME];
-  console.log('resetWhiteNameList', router.getRoutes());
   router.getRoutes().forEach((route: any) => {
     const { name } = route;
     if (name && !resetWhiteNameList.includes(name as string)) {

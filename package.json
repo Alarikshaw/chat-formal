@@ -1,6 +1,6 @@
 {
   "name": "chat-form",
-  "version": "1.0.0-rc.03",
+  "version": "1.0.0-rc.04",
   "scripts": {
     "bootstrap": "yarn install",
     "start": "vite",
@@ -26,6 +26,7 @@
     "ant-design-vue": "^2.0.0-rc.4",
     "axios": "^0.21.0",
     "crypto-es": "^1.2.6",
+    "js-cookie": "^2.2.1",
     "lodash-es": "^4.17.15",
     "nprogress": "^0.2.0",
     "vue": "^3.0.4",
@@ -41,6 +42,7 @@
     "@purge-icons/generated": "^0.4.1",
     "@types/echarts": "^4.9.1",
     "@types/fs-extra": "^9.0.4",
+    "@types/js-cookie": "^2.2.6",
     "@types/koa-static": "^4.0.1",
     "@types/lodash-es": "^4.17.3",
     "@types/nprogress": "^0.2.0",

@@ -21,13 +21,11 @@ const body = document.body;
  * @param router
  */
 export function createGuard(router: Router) {
-  console.log('asdasdasdasdasdasdasdasdasdasdasdasd----------');
   let axiosCanceler: Nullable<AxiosCanceler>;
   const loadedPageMap = new Map<string, boolean>();
   router.beforeEach(async (to) => {
     to.meta.loaded = !!loadedPageMap.get(to.path);
     // 通知路由变化
-    console.log('通知路由变化');
     setLastChangeTab(to);
     return true;
   });

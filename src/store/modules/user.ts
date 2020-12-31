@@ -18,6 +18,7 @@ import { RoleEnum } from '/@/enums/roleEnum';
 import { setLocal, getLocal, setSession, getSession } from '/@/utils/helper/persistent';
 import { CacheTypeEnum, USER_INFO_KEY, ROLES_KEY, TOKEN_KEY } from '/@/enums/cacheEnum';
 import { useProjectSetting } from '/@/hooks/setting';
+import { GetRegister } from '/@/api';
 export type UserInfo = Omit<GetUserInfoByUserIdModel, 'roles'>;
 const NAME = 'user';
 hotModuleUnregisterModule(NAME);
@@ -88,7 +89,6 @@ class User extends VuexModule {
   @Mutation
   commitTokenState(info: string): void {
     this.tokenState = info;
-    console.log('设置的token', info);
     setCache(TOKEN_KEY, info);
   }
   @Mutation
@@ -121,8 +121,6 @@ class User extends VuexModule {
       };
       // get user info
       const userInfo = await this.getUserInfoAction(resData);
-      console.log('user.ts userInfo', userInfo);
-      console.log('user.ts token', token);
       // save token
       this.commitTokenState(token);
 
@@ -132,6 +130,25 @@ class User extends VuexModule {
       return userInfo;
     } catch (error) {
       return null;
+    }
+  }
+
+  @Action
+  async getRegister(param: UserRegister): Promise<RepUserReg> {
+    const registerRes: any = await GetRegister(param);
+    if (registerRes.code === 0) {
+      console.log('registerRes', registerRes);
+      this.commitTokenState(registerRes.data.token);
+      await router.replace(PageEnum.BASE_HOME);
+      return registerRes;
+    } else {
+      return {
+        code: registerRes.code,
+        data: {
+          token: '',
+        },
+        msg: registerRes.msg,
+      };
     }
   }
 

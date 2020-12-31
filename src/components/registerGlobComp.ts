@@ -1,4 +1,3 @@
-import Icon from './Icon/index';
 import { Button } from './Button';
 import {
   // Need
@@ -37,7 +36,7 @@ import {
 } from 'ant-design-vue';
 import { getApp } from '/@/setup/App';
 
-const compList = [Icon, Button, AntButton.Group];
+const compList = [Button, AntButton.Group];
 
 // Fix hmr multiple registered components
 let registered = false;
