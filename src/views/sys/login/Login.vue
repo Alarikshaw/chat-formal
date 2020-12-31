@@ -93,7 +93,6 @@ export default defineComponent({
       }, // 表单校验
     };
     const state = reactive(origin);
-    console.log(state);
     async function changeType(type: string) {
       state.titleType = type;
       if (state.titleType === 'login') {
@@ -104,7 +103,6 @@ export default defineComponent({
     }
     const formRef = ref<any>(null);
     const { notification } = useMessage();
-
     /**
      * 登录
      */
@@ -114,8 +112,6 @@ export default defineComponent({
       let data = await form.validate();
       state.loading = true;
       if (state.titleType === 'register') {
-        // createErrorModal({ title: 'Tip', content: '这是测试' });
-        console.log('ceeateTime', data);
         data.createTime = new Date().valueOf();
         try {
           const userInfo = await userStore.getRegister(data);
@@ -139,6 +135,7 @@ export default defineComponent({
         }
         return false;
       } else {
+        state.loading = false;
         try {
           const userInfo = await userStore.login(data);
           if (userInfo) {
