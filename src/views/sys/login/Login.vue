@@ -110,7 +110,7 @@ export default defineComponent({
       const form = unref(formRef);
       if (!form) return;
       let data = await form.validate();
-      state.loading = true;
+    //   state.loading = true;
       if (state.titleType === 'register') {
         data.createTime = new Date().valueOf();
         try {
@@ -129,6 +129,7 @@ export default defineComponent({
             });
           }
         } catch (e) {
+            state.loading = false;
           return e;
         } finally {
           state.loading = false;

@@ -1,5 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import cookie from 'js-cookie';
+import { getToken } from '/@/utils/auth';
 
 // 请求拦截器
 export const requestSuccess = (request: AxiosRequestConfig) => {

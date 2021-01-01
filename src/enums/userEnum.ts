@@ -10,7 +10,12 @@ interface UserRegister {
   /**
    * 注册用户名
    */
-  userName: string;
+  userName?: string;
+
+  /**
+   * 注册用户名
+   */
+  username?: string;
 
   /**
    * 注册时间

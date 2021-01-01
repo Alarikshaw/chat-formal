@@ -110,13 +110,11 @@ class User extends VuexModule {
   ): Promise<GetUserInfoByUserIdModel | null> {
     try {
       const { goHome = true } = params;
-      console.log('params', params);
       const reqParam = {
-        userName: params.userName,
+        username: params.userName,
         password: params.password,
       };
       const loginRes: any = await PostLogin(reqParam);
-      console.log('registerRes', loginRes);
       const resData = {
         userId: params.password,
       };
@@ -134,7 +132,10 @@ class User extends VuexModule {
 
   @Action
   async getRegister(param: UserRegister): Promise<RepUserReg> {
-    const registerRes: any = await GetRegister(param);
+    let regParam = { ...param };
+    regParam.username = regParam.userName;
+    delete regParam.userName;
+    const registerRes: any = await GetRegister(regParam);
     if (registerRes.code === 0) {
       this.commitTokenState(registerRes.data.token);
       await router.replace(PageEnum.BASE_HOME);

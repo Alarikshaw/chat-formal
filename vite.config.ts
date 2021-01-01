@@ -22,7 +22,6 @@ const {
   VITE_DROP_CONSOLE,
   // VITE_USE_CDN,
 } = viteEnv;
-
 function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir);
 }
