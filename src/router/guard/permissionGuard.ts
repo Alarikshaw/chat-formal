@@ -12,7 +12,7 @@ export function createPermissionGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
     // 根据传入的路由先行判断是否进入首页或者进入404页面
     if (from.path === LOGIN_PATH && to.name === PAGE_NOT_FOUND_ROUTE.name) {
-      next(PageEnum.BASE_HOME);
+      next(PageEnum.BASE_CHAT);
       return;
     }
 

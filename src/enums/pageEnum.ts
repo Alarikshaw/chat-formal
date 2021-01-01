@@ -9,7 +9,8 @@ export enum PageEnum {
   /**
    * 基本路径
    */
-  BASE_HOME = '/home',
+  BASE_CHAT = '/chat',
+
   /**
    * 错误页面路径
    */

@@ -123,7 +123,7 @@ class User extends VuexModule {
       // save token
       this.commitTokenState(loginRes.data.token);
 
-      goHome && (await router.replace(PageEnum.BASE_HOME));
+      goHome && (await router.replace(PageEnum.BASE_CHAT));
       return userInfo;
     } catch (error) {
       return null;
@@ -138,7 +138,7 @@ class User extends VuexModule {
     const registerRes: any = await GetRegister(regParam);
     if (registerRes.code === 0) {
       this.commitTokenState(registerRes.data.token);
-      await router.replace(PageEnum.BASE_HOME);
+      await router.replace(PageEnum.BASE_CHAT);
       return registerRes;
     } else {
       return {
