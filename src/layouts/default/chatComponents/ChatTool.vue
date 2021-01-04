@@ -87,9 +87,12 @@
           <Input
             class="tool-user-input"
             placeholder="请输入用户名"
-            v-model="state.username"
+            v-model:value="userInfo.username"
           />
-          <Button type="primary">确认</Button>
+          <Button
+            type="primary"
+            @click="changeUserName"
+          >确认</Button>
         </div>
         <div class="tool-user-info">
           <div class="tool-user-title">
@@ -97,7 +100,7 @@
           </div>
           <InputPassword
             class="tool-user-input"
-            v-model="state.password"
+            v-model:value="userInfo.password"
             placeholder="请输入密码"
           ></InputPassword>
           <Button type="primary">确认</Button>
@@ -107,7 +110,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, onUpdated, onUnmounted, reactive } from 'vue';
+import { defineComponent, onMounted, onUpdated, onUnmounted, reactive, onBeforeMount } from 'vue';
 import { Tooltip, Modal, Avatar, Upload, Input, Button } from 'ant-design-vue';
 import {
   BulbOutlined,
@@ -121,6 +124,7 @@ import { userStore } from '/@/store/modules/user';
 import { getTokenState } from '/@/utils/auth';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { setUserAvatar } from '/@/api/apis';
+import { nameVerify } from '/@/utils/common';
 export default defineComponent({
   components: {
     Tooltip,
@@ -138,6 +142,7 @@ export default defineComponent({
     LoadingOutlined,
   },
   setup() {
+    // 页面数据池
     const origin: any = {
       username: '',
       password: '',
@@ -148,15 +153,22 @@ export default defineComponent({
       showUserModal: false,
       showBackgroundModal: false,
       user: {
-        username: '测试',
+        username: '',
+        password: '',
       },
     };
+    // 用户信息池
+    const userOrigin = {
+      username: '',
+      password: '',
+    };
+    let userInfo = reactive(userOrigin);
     const state = reactive(origin);
     const showUserInfo = () => {
       state.username = '';
       state.showUserModal = true;
     };
-
+    // 提示信息
     const { createMessage } = useMessage();
     /**
      * 退出登录
@@ -164,6 +176,7 @@ export default defineComponent({
     function handleLoginOut() {
       userStore.confirmLoginOut();
     }
+    // 上传图片(更新头像)
     async function handleUpload(file: any) {
       state.uploading = true;
       const formData = new FormData();
@@ -173,7 +186,14 @@ export default defineComponent({
       let data = await setUserAvatar(formData, state.user);
       console.log('data', data);
       // code: 0 成功; 1 错误; 2 后端报错
-      if (data) {
+      if (data!.data!.code === 0) {
+        // 上传成功，替换图片，更新状态
+        state.uploading = false;
+        state.showUpload = false;
+        createMessage.success(data.data.msg);
+        userStore.getUserInfoAction(data.data.data);
+        state.avatar = data.data.data.avatar;
+        // 通知其他用户个人信息改变
       }
     }
     /**
@@ -195,9 +215,19 @@ export default defineComponent({
       }
       handleUpload(file);
     }
-
+    // 修改用户名
+    async function changeUserName() {
+      if (!nameVerify(userInfo.username)) {
+        return;
+      }
+      //   let user = userInfo.value;
+    }
+    onBeforeMount(() => {});
     onMounted(() => {
+      console.log('onMounted getTokenState', getTokenState());
       state.user = getTokenState();
+      userInfo.username = getTokenState().username;
+      userInfo.password = getTokenState().password;
       state.avatar = getTokenState().avatar;
       console.log('state.avatar', state.avatar);
       console.log('mounted!');
@@ -214,6 +244,8 @@ export default defineComponent({
       handleLoginOut,
       state,
       beforeUpload,
+      userInfo,
+      changeUserName,
     };
   },
 });
