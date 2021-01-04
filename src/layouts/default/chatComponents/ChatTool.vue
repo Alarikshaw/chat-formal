@@ -103,14 +103,14 @@
             v-model:value="userInfo.password"
             placeholder="请输入密码"
           ></InputPassword>
-          <Button type="primary">确认</Button>
+          <Button type="primary" @click="changePassword">确认</Button>
         </div>
       </div>
     </Modal>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, onUpdated, onUnmounted, reactive, onBeforeMount } from 'vue';
+import { defineComponent, onMounted, onUpdated, onUnmounted, reactive, onBeforeMount, unref } from 'vue';
 import { Tooltip, Modal, Avatar, Upload, Input, Button } from 'ant-design-vue';
 import {
   BulbOutlined,
@@ -123,7 +123,7 @@ import {
 import { userStore } from '/@/store/modules/user';
 import { getTokenState } from '/@/utils/auth';
 import { useMessage } from '/@/hooks/web/useMessage';
-import { setUserAvatar } from '/@/api/apis';
+import { patchUserName, setUserAvatar, patchPassword } from '/@/api/apis';
 import { nameVerify } from '/@/utils/common';
 export default defineComponent({
   components: {
@@ -194,6 +194,8 @@ export default defineComponent({
         userStore.getUserInfoAction(data.data.data);
         state.avatar = data.data.data.avatar;
         // 通知其他用户个人信息改变
+      } else {
+          createMessage.error('更新失败！');
       }
     }
     /**
@@ -220,7 +222,35 @@ export default defineComponent({
       if (!nameVerify(userInfo.username)) {
         return;
       }
-      //   let user = userInfo.value;
+      let param = unref({ ...state.user })
+      param.username = userInfo.username;
+      let updateName = await patchUserName(param);
+      if (updateName?.data?.code === 0) {
+          createMessage.success(updateName.data.msg);
+          userStore.getUserInfoAction(updateName.data.data);
+          state.user = updateName.data.data;
+          userInfo.username = updateName.data.data.username;
+      } else {
+          createMessage.error('更新失败！');
+      }
+    }
+    /**
+     * 更新密码
+     */
+    async function changePassword() {
+        if (!nameVerify(userInfo.password)) {
+            return;
+        }
+        let param = unref({ ...state.user })
+        let updateName = await patchPassword(param, userInfo.password);
+        if (updateName?.data?.code === 0) {
+            createMessage.success(updateName.data.msg);
+            userStore.getUserInfoAction(updateName.data.data);
+            state.user = updateName.data.data;
+            userInfo.password = updateName.data.data.password;
+        } else {
+            createMessage.error('更新失败！');
+        }
     }
     onBeforeMount(() => {});
     onMounted(() => {
@@ -246,6 +276,7 @@ export default defineComponent({
       beforeUpload,
       userInfo,
       changeUserName,
+      changePassword
     };
   },
 });
@@ -277,6 +308,7 @@ export default defineComponent({
       text-overflow: ellipsis; //溢出用省略号显示
       white-space: nowrap; //溢出不换行
       margin-top: 2px;
+      text-align: center;
     }
   }
   .tool-tip {

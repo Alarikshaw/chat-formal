@@ -93,6 +93,8 @@ export default defineComponent({
       }, // 表单校验
     };
     const state = reactive(origin);
+    // 提示信息
+    const { createMessage } = useMessage();
     async function changeType(type: string) {
       state.titleType = type;
       if (state.titleType === 'login') {
@@ -145,6 +147,8 @@ export default defineComponent({
               description: '欢迎回来',
               duration: 3,
             });
+          } else {
+              createMessage.error('密码错误');
           }
         } catch (error) {
         } finally {

@@ -1,6 +1,6 @@
 {
   "name": "chat-form",
-  "version": "1.0.0-rc.09",
+  "version": "1.0.0-rc.10",
   "scripts": {
     "bootstrap": "yarn install",
     "start": "vite",
