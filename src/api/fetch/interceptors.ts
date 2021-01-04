@@ -4,7 +4,7 @@ import { getToken } from '/@/utils/auth';
 
 // 请求拦截器
 export const requestSuccess = (request: AxiosRequestConfig) => {
-  const token = cookie.get('token');
+  const token = getToken();
   request.headers.token = token;
   return request;
 };

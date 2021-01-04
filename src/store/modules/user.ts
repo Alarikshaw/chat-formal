@@ -115,11 +115,9 @@ class User extends VuexModule {
         password: params.password,
       };
       const loginRes: any = await PostLogin(reqParam);
-      const resData = {
-        userId: params.password,
-      };
       // get user info
-      const userInfo = await this.getUserInfoAction(resData);
+      const userInfo = await this.getUserInfoAction(loginRes.data.user);
+      console.log('登录', userInfo);
       // save token
       this.commitTokenState(loginRes.data.token);
 
@@ -136,7 +134,9 @@ class User extends VuexModule {
     regParam.username = regParam.userName;
     delete regParam.userName;
     const registerRes: any = await GetRegister(regParam);
+    console.log('注册', registerRes);
     if (registerRes.code === 0) {
+      await this.getUserInfoAction(registerRes.data.user);
       this.commitTokenState(registerRes.data.token);
       await router.replace(PageEnum.BASE_CHAT);
       return registerRes;

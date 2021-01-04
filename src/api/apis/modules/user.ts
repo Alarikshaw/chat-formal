@@ -1,4 +1,5 @@
 import fetch from '/@/api/fetch';
+import { getToken } from '/@/utils/auth';
 
 /**
  * 更新用户名
@@ -34,7 +35,7 @@ export function getUsersByName(username: string) {
  * 用户头像上传
  * @param params
  */
-export function setUserAvatar(params: FormData) {
+export function setUserAvatar(params: FormData, user: any) {
   return fetch.post(`/user/avatar`, params, {
     headers: {
       'Content-Type': 'multipart/form-data',

@@ -7,13 +7,6 @@ export interface LoginParams {
 }
 
 /**
- * 获取用户信息
- */
-export interface GetUserInfoByUserIdParams {
-  userId: string | number;
-}
-
-/**
  * 获取角色信息
  */
 export interface RoleInfo {
@@ -34,13 +27,24 @@ export interface LoginResultModel {
  * @description: Get user information return value
  */
 export interface GetUserInfoByUserIdModel {
-  role?: RoleInfo;
-  // 用户id
-  userId?: string | number;
-  // 用户名
-  userName?: string;
-  // 真实名字
-  realName?: string;
-  // 介绍
-  desc?: string;
+  userId: string;
+  username: string;
+  createTime: number;
+  password: string;
+  status?: string;
+  tag?: string;
+  avatar?: string;
+}
+
+/**
+ * 获取用户信息
+ */
+export interface GetUserInfoByUserIdParams {
+  userId: string;
+  username: string;
+  createTime: number;
+  password: string;
+  status?: string;
+  tag?: string;
+  avatar: string;
 }
