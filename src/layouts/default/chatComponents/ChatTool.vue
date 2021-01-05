@@ -30,6 +30,7 @@
     <SkinOutlined
       class="icon tool-skin"
       :style="{fontSize: '32px'}"
+      @click="state.showBackgroundModal = true"
     />
     <a
       href="https://github.com/Alarikshaw"
@@ -103,14 +104,33 @@
             v-model:value="userInfo.password"
             placeholder="请输入密码"
           ></InputPassword>
-          <Button type="primary" @click="changePassword">确认</Button>
+          <Button
+            type="primary"
+            @click="changePassword"
+          >确认</Button>
         </div>
       </div>
+    </Modal>
+    <Modal
+      title="主题"
+      :visible="state.showBackgroundModal"
+      footer=""
+      @cancel="state.showBackgroundModal = false"
+    >
+
     </Modal>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, onUpdated, onUnmounted, reactive, onBeforeMount, unref } from 'vue';
+import {
+  defineComponent,
+  onMounted,
+  onUpdated,
+  onUnmounted,
+  reactive,
+  onBeforeMount,
+  unref,
+} from 'vue';
 import { Tooltip, Modal, Avatar, Upload, Input, Button } from 'ant-design-vue';
 import {
   BulbOutlined,
@@ -150,7 +170,7 @@ export default defineComponent({
       uploading: '',
       avatar: '',
       showUpload: false,
-      showUserModal: false,
+      showUserModal: false, // 修改用户信息弹框
       showBackgroundModal: false,
       user: {
         username: '',
@@ -184,7 +204,6 @@ export default defineComponent({
       formData.append('userId', state.user.userId);
       formData.append('password', state.user.password);
       let data = await setUserAvatar(formData, state.user);
-      console.log('data', data);
       // code: 0 成功; 1 错误; 2 后端报错
       if (data!.data!.code === 0) {
         // 上传成功，替换图片，更新状态
@@ -195,14 +214,13 @@ export default defineComponent({
         state.avatar = data.data.data.avatar;
         // 通知其他用户个人信息改变
       } else {
-          createMessage.error('更新失败！');
+        createMessage.error('更新失败！');
       }
     }
     /**
      * 上传更改头像
      */
     function beforeUpload(file: any) {
-      console.log('file', file);
       const isJpgOrPng =
         file.type === 'image/jpeg' ||
         file.type === 'image/png' ||
@@ -222,35 +240,35 @@ export default defineComponent({
       if (!nameVerify(userInfo.username)) {
         return;
       }
-      let param = unref({ ...state.user })
+      let param = unref({ ...state.user });
       param.username = userInfo.username;
       let updateName = await patchUserName(param);
       if (updateName?.data?.code === 0) {
-          createMessage.success(updateName.data.msg);
-          userStore.getUserInfoAction(updateName.data.data);
-          state.user = updateName.data.data;
-          userInfo.username = updateName.data.data.username;
+        createMessage.success(updateName.data.msg);
+        userStore.getUserInfoAction(updateName.data.data);
+        state.user = updateName.data.data;
+        userInfo.username = updateName.data.data.username;
       } else {
-          createMessage.error('更新失败！');
+        createMessage.error('更新失败！');
       }
     }
     /**
      * 更新密码
      */
     async function changePassword() {
-        if (!nameVerify(userInfo.password)) {
-            return;
-        }
-        let param = unref({ ...state.user })
-        let updateName = await patchPassword(param, userInfo.password);
-        if (updateName?.data?.code === 0) {
-            createMessage.success(updateName.data.msg);
-            userStore.getUserInfoAction(updateName.data.data);
-            state.user = updateName.data.data;
-            userInfo.password = updateName.data.data.password;
-        } else {
-            createMessage.error('更新失败！');
-        }
+      if (!nameVerify(userInfo.password)) {
+        return;
+      }
+      let param = unref({ ...state.user });
+      let updateName = await patchPassword(param, userInfo.password);
+      if (updateName?.data?.code === 0) {
+        createMessage.success(updateName.data.msg);
+        userStore.getUserInfoAction(updateName.data.data);
+        state.user = updateName.data.data;
+        userInfo.password = updateName.data.data.password;
+      } else {
+        createMessage.error('更新失败！');
+      }
     }
     onBeforeMount(() => {});
     onMounted(() => {
@@ -276,7 +294,7 @@ export default defineComponent({
       beforeUpload,
       userInfo,
       changeUserName,
-      changePassword
+      changePassword,
     };
   },
 });
