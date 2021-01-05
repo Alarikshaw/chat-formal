@@ -117,7 +117,46 @@
       footer=""
       @cancel="state.showBackgroundModal = false"
     >
-
+      <div class="tool-user-info">
+        <div
+          class="tool-user-title"
+          style="width: 65px;"
+        >
+          <span>背景图</span>
+          <Tooltip
+            placement="topLeft"
+            arrow-point-at-center
+          >
+            <template v-slot:title>
+              <span>输入空格时为默认背景, 支持 jpg, png, gif等格式</span>
+            </template>
+            <ExclamationCircleOutlined style="margin-left: 5px;" />
+          </Tooltip>
+        </div>
+        <Input
+          v-model="state.background"
+          class="tool-user-input"
+          placeholder="请输入背景图片网址"
+        />
+        <Button
+          type="primary"
+          @click="changeBackground"
+        >确认</Button>
+      </div>
+      <div class="tool-recommend">
+        <div
+          class="recommend"
+          v-for="(item, index) in imgData"
+          :key="index"
+          @click="setBackground(item.src)"
+        >
+          <img
+            :src="item.src"
+            alt=""
+          >
+          <span class="text">{{ item.text }}</span>
+        </div>
+      </div>
     </Modal>
   </div>
 </template>
@@ -139,13 +178,16 @@ import {
   GithubOutlined,
   ToTopOutlined,
   LoadingOutlined,
+  ExclamationCircleOutlined,
 } from '@ant-design/icons-vue';
 import { userStore } from '/@/store/modules/user';
 import { getTokenState } from '/@/utils/auth';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { patchUserName, setUserAvatar, patchPassword } from '/@/api/apis';
 import { nameVerify } from '/@/utils/common';
+import { imgList } from './imgData';
 export default defineComponent({
+  name: 'ChatTool',
   components: {
     Tooltip,
     Modal,
@@ -160,6 +202,7 @@ export default defineComponent({
     GithubOutlined,
     ToTopOutlined,
     LoadingOutlined,
+    ExclamationCircleOutlined,
   },
   setup() {
     // 页面数据池
@@ -177,6 +220,7 @@ export default defineComponent({
         password: '',
       },
     };
+    const imgData: any = reactive(imgList);
     // 用户信息池
     const userOrigin = {
       username: '',
@@ -270,15 +314,23 @@ export default defineComponent({
         createMessage.error('更新失败！');
       }
     }
+    /**
+     * 修改背景图
+     */
+    async function changeBackground() {
+      state.showBackgroundModal = false;
+    }
+    async function setBackground(src: any) {
+      let param = unref({ ...state.user });
+      param.background = src;
+      userStore.getUserInfoAction(param);
+    }
     onBeforeMount(() => {});
     onMounted(() => {
-      console.log('onMounted getTokenState', getTokenState());
       state.user = getTokenState();
       userInfo.username = getTokenState().username;
       userInfo.password = getTokenState().password;
       state.avatar = getTokenState().avatar;
-      console.log('state.avatar', state.avatar);
-      console.log('mounted!');
     });
     onUpdated(() => {
       console.log('updated!');
@@ -295,6 +347,9 @@ export default defineComponent({
       userInfo,
       changeUserName,
       changePassword,
+      changeBackground,
+      imgData,
+      setBackground,
     };
   },
 });

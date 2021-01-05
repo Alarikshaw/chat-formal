@@ -5,35 +5,42 @@
     </div> -->
   <div class="chat">
     <div class="chat-form1">
-      <ChatTool @logout="handleLoginOut"></ChatTool>
+      <ChatTool></ChatTool>
     </div>
   </div>
+  <img
+    class="background"
+    :src="imgSrc.src"
+    alt=""
+  />
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { userStore } from '/@/store/modules/user';
+import { defineComponent, reactive, onBeforeMount, watch } from 'vue';
+import { defaultImg } from './chatComponents/imgData';
 import ChatTool from '/@/layouts/default/chatComponents/ChatTool.vue';
-import background from '/@/assets/images/login/bannerimgs.jpg';
+import { getTokenState } from '/@/utils/auth';
 export default defineComponent({
   components: {
     ChatTool,
   },
   name: 'Chat',
   setup() {
-    const logout = async () => {
-      console.log('logout');
-    };
-    /**
-     * 退出登录
-     */
-    function handleLoginOut() {
-      userStore.confirmLoginOut();
-    }
-
+    let token = reactive({
+      src: '',
+    });
+    let imgSrc = reactive({
+      src: '',
+    });
+    onBeforeMount(() => {
+      token = getTokenState();
+      console.log('app token', token, defaultImg);
+      if (!token.src) {
+        imgSrc.src = defaultImg.src;
+      }
+    });
+    console.log('imgSrc', imgSrc);
     return {
-      logout,
-      handleLoginOut,
-      background,
+      imgSrc,
     };
   },
 });
@@ -60,5 +67,11 @@ export default defineComponent({
     height: 100%;
     background-color: rgb(0, 0, 0, 0.7);
   }
+}
+.background {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 </style>

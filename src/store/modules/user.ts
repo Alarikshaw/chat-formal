@@ -117,7 +117,6 @@ class User extends VuexModule {
       const loginRes: any = await PostLogin(reqParam);
       // get user info
       const userInfo = await this.getUserInfoAction(loginRes.data.user);
-      console.log('登录', userInfo);
       // save token
       this.commitTokenState(loginRes.data.token);
 
@@ -134,7 +133,6 @@ class User extends VuexModule {
     regParam.username = regParam.userName;
     delete regParam.userName;
     const registerRes: any = await GetRegister(regParam);
-    console.log('注册', registerRes);
     if (registerRes.code === 0) {
       await this.getUserInfoAction(registerRes.data.user);
       this.commitTokenState(registerRes.data.token);
@@ -151,6 +149,10 @@ class User extends VuexModule {
     }
   }
 
+  /**
+   * 设置用户信息至本地
+   * @param params
+   */
   @Action
   async getUserInfoAction(params: GetUserInfoByUserIdParams) {
     // const userInfo = await getUserInfoById({ userId });
