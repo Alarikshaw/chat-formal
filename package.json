@@ -23,7 +23,7 @@
     "reinstall": "rimraf yarn.lock && rimraf package.lock.json && rimraf node_modules && npm run bootstrap"
   },
   "dependencies": {
-    "ant-design-vue": "^2.0.0-rc.4",
+    "ant-design-vue": "2.0.0-rc.7",
     "axios": "^0.21.0",
     "crypto-es": "^1.2.6",
     "js-cookie": "^2.2.1",
