@@ -254,7 +254,10 @@ export default defineComponent({
         state.uploading = false;
         state.showUpload = false;
         createMessage.success(data.data.msg);
-        userStore.getUserInfoAction(data.data.data);
+        console.log('data.data.data', data.data.data);
+        let param = data.data.data;
+        param.background = userStore.getUserInfoState().background;
+        userStore.getUserInfoAction(param);
         state.avatar = data.data.data.avatar;
         // 通知其他用户个人信息改变
       } else {
