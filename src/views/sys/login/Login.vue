@@ -178,6 +178,7 @@ export default defineComponent({
 .login {
   position: relative;
   height: 100vh;
+  width: 100%;
   min-width: 1200px;
   background: url(../../../assets/images/login/bannerimgs.jpg) no-repeat;
   background-size: 100% 100%;

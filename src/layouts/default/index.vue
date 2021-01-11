@@ -82,6 +82,10 @@ export default defineComponent({
     height: 100%;
     background-color: rgb(0, 0, 0, 0.7);
   }
+  .chat-form2 {
+      width: 230px;
+      padding: 10px;
+  }
 }
 .background {
   position: absolute;

@@ -16,11 +16,11 @@
         placement="bottomCenter"
         :trigger="['click']"
       >
-        <PlusCircleOutlined />
+        <PlusCircleOutlined class="search-dropdown-button" />
         <template #overlay>
           <Menu
             selectable
-            v-model:selectedKeys="state.visibleAddGroup"
+            v-model="state.visibleAddGroup"
           >
             <MenuItem key="default"><span>创建群</span></MenuItem>
             <MenuItem key="middle"><span>搜索群</span></MenuItem>
@@ -41,6 +41,7 @@ export default defineComponent({
   components: {
     Select,
     Dropdown,
+    Menu,
     MenuItem: Menu.Item,
     PlusCircleOutlined,
   },
@@ -73,13 +74,13 @@ export default defineComponent({
   }
   .search-dropdown {
     position: absolute;
-    right: 10px;
-    top: 13px;
+    right: 0px;
+    top: 0px;
     width: 40px;
-    height: 34px;
+    height: 32px;
     font-size: 20px;
     cursor: pointer;
-    line-height: 40px;
+    line-height: 39px;
     color: gray;
     transition: 0.2s all linear;
     border-radius: 4px;
