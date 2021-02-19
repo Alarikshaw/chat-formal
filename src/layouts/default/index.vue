@@ -68,7 +68,7 @@ export default defineComponent({
   min-width: 300px;
   width: 100%;
   height: 80%;
-  max-height: 900px;
+//   max-height: 900px;
   min-height: 470px;
   position: relative;
   margin: auto 20px;
