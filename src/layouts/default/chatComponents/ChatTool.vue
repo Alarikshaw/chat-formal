@@ -254,9 +254,8 @@ export default defineComponent({
         state.uploading = false;
         state.showUpload = false;
         createMessage.success(data.data.msg);
-        console.log('data.data.data', data.data.data);
         let param = data.data.data;
-        param.background = userStore.getUserInfoState().background;
+        param.background = userStore.getUserInfoState.background;
         userStore.getUserInfoAction(param);
         state.avatar = data.data.data.avatar;
         // 通知其他用户个人信息改变
@@ -336,10 +335,10 @@ export default defineComponent({
       state.avatar = getTokenState().avatar;
     });
     onUpdated(() => {
-      console.log('updated!');
+      //   console.log('updated!');
     });
     onUnmounted(() => {
-      console.log('unmounted!');
+      //   console.log('unmounted!');
     });
 
     return {

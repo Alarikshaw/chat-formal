@@ -8,12 +8,12 @@
     :style="{
       '--bg-image': `url('${imgSrc.src}')`,
     }"
-    >
+  >
     <div class="chat-form1">
       <ChatTool></ChatTool>
     </div>
     <div class="chat-form2">
-        <ChatSearch></ChatSearch>
+      <ChatSearch></ChatSearch>
     </div>
   </div>
   <img
@@ -32,7 +32,7 @@ import { userStore } from '/@/store/modules/user';
 export default defineComponent({
   components: {
     ChatTool,
-    ChatSearch
+    ChatSearch,
   },
   name: 'Chat',
   setup() {
@@ -40,20 +40,22 @@ export default defineComponent({
       src: '',
     });
     onBeforeMount(() => {
-        console.log('getTokenState()', getTokenState())
-        if (getTokenState()?.background) {
-            imgSrc.src = getTokenState().background;
-        } else {
-            imgSrc.src = defaultImg.src;
-        }
+      if (getTokenState()?.background) {
+        imgSrc.src = getTokenState().background;
+      } else {
+        imgSrc.src = defaultImg.src;
+      }
     });
+    // // 初始化聊天室
+    // const handleJoin = (() => {
+
+    // })
     watch(
-          () => userStore.getUserInfoState,
-          (userInfo) => {
-              console.log('watch', userInfo.background)
-              imgSrc.src = userInfo.background;
-          }
-      )
+      () => userStore.getUserInfoState,
+      (userInfo) => {
+        imgSrc.src = userInfo.background;
+      }
+    );
     return {
       imgSrc,
     };
@@ -64,7 +66,7 @@ export default defineComponent({
 .chat {
   font-size: 16px;
   z-index: 999;
-//   max-width: 1000px;
+  //   max-width: 1000px;
   min-width: 300px;
   width: 100%;
   height: 80%;
@@ -83,8 +85,8 @@ export default defineComponent({
     background-color: rgb(0, 0, 0, 0.7);
   }
   .chat-form2 {
-      width: 230px;
-      padding: 10px;
+    width: 230px;
+    padding: 10px;
   }
 }
 .background {

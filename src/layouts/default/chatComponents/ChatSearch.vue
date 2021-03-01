@@ -42,7 +42,7 @@
     >
       <div style="display: flex;">
         <Input
-          v-model.value="state.groupName"
+          v-model:value="state.groupName"
           placeholder="请输入群名字"
         />
         <Button
@@ -89,12 +89,13 @@ export default defineComponent({
     function handleSearch() {}
     function addGroup() {
       state.visibleAddGroup = false;
-      console.log('state.groupName', state.groupName);
       if (!nameVerify(state.groupName)) {
         state.visibleAddGroup = true;
         return;
       }
-      state.groupName = '';
+      console.log('state.groupName', state.groupName);
+      // 直接处理 创建接口
+      //   state.groupName = '';
     }
     return {
       state,

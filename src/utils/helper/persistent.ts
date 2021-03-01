@@ -27,7 +27,12 @@ function initCache() {
 }
 
 initCache();
-
+/**
+ * 浏览器存储信息
+ * @param key
+ * @param value
+ * @param immediate
+ */
 export function setLocal(key: string, value: any, immediate = false) {
   const local = ls.get(BASE_LOCAL_CACHE_KEY)?.[BASE_LOCAL_CACHE_KEY] || {};
 

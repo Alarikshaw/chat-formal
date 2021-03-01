@@ -19,6 +19,9 @@ export const BASE_LOCAL_CACHE_KEY = 'LOCAL__CACHE__KEY__';
 // base global session key
 export const BASE_SESSION_CACHE_KEY = 'SESSION__CACHE__KEY__';
 
+// base chat room session key
+export const CHAT_FORM_CACHE_KEY = 'CHAT__FORM__CACHE__KEY__';
+
 /**
  * 退出登录所用
  */
