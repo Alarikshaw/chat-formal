@@ -61,6 +61,7 @@ import { defineComponent, reactive } from 'vue';
 import { Select, Dropdown, Menu, Modal, Input, Button } from 'ant-design-vue';
 import { PlusCircleOutlined } from '@ant-design/icons-vue';
 import { nameVerify } from '/@/utils/common';
+import { SocketIoLink } from '/@/utils/chat';
 export default defineComponent({
   name: 'ChatSearch',
   components: {
@@ -94,6 +95,7 @@ export default defineComponent({
         return;
       }
       console.log('state.groupName', state.groupName);
+      SocketIoLink.SocketAddGroup(state.groupName);
       // 直接处理 创建接口
       //   state.groupName = '';
     }

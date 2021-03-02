@@ -29,6 +29,7 @@ import ChatTool from '/@/layouts/default/chatComponents/ChatTool.vue';
 import ChatSearch from '/@/layouts/default/chatComponents/ChatSearch.vue';
 import { getTokenState } from '/@/utils/auth';
 import { userStore } from '/@/store/modules/user';
+import { chatStore } from '/@/store/chat/chatStore';
 export default defineComponent({
   components: {
     ChatTool,
@@ -46,10 +47,7 @@ export default defineComponent({
         imgSrc.src = defaultImg.src;
       }
     });
-    // // 初始化聊天室
-    // const handleJoin = (() => {
-
-    // })
+    chatStore.connectSocket();
     watch(
       () => userStore.getUserInfoState,
       (userInfo) => {
@@ -70,7 +68,7 @@ export default defineComponent({
   min-width: 300px;
   width: 100%;
   height: 80%;
-//   max-height: 900px;
+  //   max-height: 900px;
   min-height: 470px;
   position: relative;
   margin: auto 20px;

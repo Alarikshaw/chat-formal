@@ -536,11 +536,6 @@
     "@types/connect" "*"
     "@types/node" "*"
 
-"@types/component-emitter@^1.2.10":
-  version "1.2.10"
-  resolved "http://118.190.73.84:4873/@types%2fcomponent-emitter/-/component-emitter-1.2.10.tgz#ef5b1589b9f16544642e473db5ea5639107ef3ea"
-  integrity sha1-71sVibnxZURkLkc9tepWORB+8+o=
-
 "@types/connect@*":
   version "3.4.33"
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.33.tgz#31610c901eca573b8713c3330abc6e6b9f588546"
@@ -1445,7 +1440,7 @@ babel-helper-vue-jsx-merge-props@^2.0.3:
   resolved "http://118.190.73.84:4873/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.3.tgz#22aebd3b33902328e513293a8e4992b384f9f1b6"
   integrity sha1-Iq69OzOQIyjlEyk6jkmSs4T58bY=
 
-backo2@1.0.2, backo2@~1.0.2:
+backo2@1.0.2:
   version "1.0.2"
   resolved "http://118.190.73.84:4873/backo2/-/backo2-1.0.2.tgz#31ab1ac8b129363463e35b3ebb69f4dfcfba7947"
   integrity sha1-MasayLEpNjRj41s+u2n038+6eUc=
@@ -2269,7 +2264,7 @@ debug@^3.1.0, debug@^3.1.1:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1, debug@~4.3.1:
+debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
@@ -2538,22 +2533,6 @@ engine.io-client@~3.5.0:
     xmlhttprequest-ssl "~1.5.4"
     yeast "0.1.2"
 
-engine.io-client@~4.1.0:
-  version "4.1.2"
-  resolved "http://118.190.73.84:4873/engine.io-client/-/engine.io-client-4.1.2.tgz#823b4f005360321c41445fc23ce8ee028ef2e36b"
-  integrity sha1-gjtPAFNgMhxBRF/CPOjuAo7y42s=
-  dependencies:
-    base64-arraybuffer "0.1.4"
-    component-emitter "~1.3.0"
-    debug "~4.3.1"
-    engine.io-parser "~4.0.1"
-    has-cors "1.1.0"
-    parseqs "0.0.6"
-    parseuri "0.0.6"
-    ws "~7.4.2"
-    xmlhttprequest-ssl "~1.5.4"
-    yeast "0.1.2"
-
 engine.io-parser@~2.2.0:
   version "2.2.1"
   resolved "http://118.190.73.84:4873/engine.io-parser/-/engine.io-parser-2.2.1.tgz#57ce5611d9370ee94f99641b589f94c97e4f5da7"
@@ -2564,13 +2543,6 @@ engine.io-parser@~2.2.0:
     base64-arraybuffer "0.1.4"
     blob "0.0.5"
     has-binary2 "~1.0.2"
-
-engine.io-parser@~4.0.1:
-  version "4.0.2"
-  resolved "http://118.190.73.84:4873/engine.io-parser/-/engine.io-parser-4.0.2.tgz#e41d0b3fb66f7bf4a3671d2038a154024edb501e"
-  integrity sha1-5B0LP7Zve/SjZx0gOKFUAk7bUB4=
-  dependencies:
-    base64-arraybuffer "0.1.4"
 
 enquirer@^2.3.5, enquirer@^2.3.6:
   version "2.3.6"
@@ -6190,7 +6162,7 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-socket.io-client@^2.1.1:
+socket.io-client@^2.1.1, socket.io-client@^2.3.0:
   version "2.4.0"
   resolved "http://118.190.73.84:4873/socket.io-client/-/socket.io-client-2.4.0.tgz#aafb5d594a3c55a34355562fc8aea22ed9119a35"
   integrity sha1-qvtdWUo8VaNDVVYvyK6iLtkRmjU=
@@ -6207,19 +6179,6 @@ socket.io-client@^2.1.1:
     socket.io-parser "~3.3.0"
     to-array "0.1.4"
 
-socket.io-client@^3.1.2:
-  version "3.1.2"
-  resolved "http://118.190.73.84:4873/socket.io-client/-/socket.io-client-3.1.2.tgz#77be8c180cef29121970856e8f48e5463631020a"
-  integrity sha1-d76MGAzvKRIZcIVuj0jlRjYxAgo=
-  dependencies:
-    "@types/component-emitter" "^1.2.10"
-    backo2 "~1.0.2"
-    component-emitter "~1.3.0"
-    debug "~4.3.1"
-    engine.io-client "~4.1.0"
-    parseuri "0.0.6"
-    socket.io-parser "~4.0.4"
-
 socket.io-parser@~3.3.0:
   version "3.3.2"
   resolved "http://118.190.73.84:4873/socket.io-parser/-/socket.io-parser-3.3.2.tgz#ef872009d0adcf704f2fbe830191a14752ad50b6"
@@ -6228,15 +6187,6 @@ socket.io-parser@~3.3.0:
     component-emitter "~1.3.0"
     debug "~3.1.0"
     isarray "2.0.1"
-
-socket.io-parser@~4.0.4:
-  version "4.0.4"
-  resolved "http://118.190.73.84:4873/socket.io-parser/-/socket.io-parser-4.0.4.tgz#9ea21b0d61508d18196ef04a2c6b9ab630f4c2b0"
-  integrity sha1-nqIbDWFQjRgZbvBKLGuatjD0wrA=
-  dependencies:
-    "@types/component-emitter" "^1.2.10"
-    component-emitter "~1.3.0"
-    debug "~4.3.1"
 
 source-map-resolve@^0.5.0:
   version "0.5.3"
@@ -7153,8 +7103,8 @@ vue@^3.0.4:
 
 vuex-module-decorators@^1.0.1:
   version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vuex-module-decorators/-/vuex-module-decorators-1.0.1.tgz#d34dafb5428a3636f1c26d3d014c15fc9659ccd0"
-  integrity sha512-FLWZsXV5XAtl/bcKUyQFpnSBtpc3wK/7zSdy9oKbyp71mZd4ut5y2zSd219wWW9OG7WUOlVwac4rXFFDVnq7ug==
+  resolved "https://registry.npm.taobao.org/vuex-module-decorators/download/vuex-module-decorators-1.0.1.tgz#d34dafb5428a3636f1c26d3d014c15fc9659ccd0"
+  integrity sha1-002vtUKKNjbxwm09AUwV/JZZzNA=
 
 vuex@^4.0.0-rc.2:
   version "4.0.0-rc.2"
