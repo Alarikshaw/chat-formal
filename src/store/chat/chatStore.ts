@@ -11,6 +11,8 @@ import { useProjectSetting } from '/@/hooks/setting';
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper';
 import { VuexModule, Module, getModule, Mutation, Action } from 'vuex-module-decorators';
 import { userStore } from '../modules/user';
+
+import { watch } from 'vue';
 const NAME = 'chat';
 hotModuleUnregisterModule(NAME);
 import {
@@ -28,6 +30,7 @@ import {
   DEL_FRIEND,
   ADD_UNREAD_GATHER,
 } from './mutation-types';
+import { useMessage } from '/@/hooks/web/useMessage';
 const { permissionCacheType } = useProjectSetting();
 function setCache(USER_INFO_KEY: string, info: any) {
   if (!info) return;
@@ -46,10 +49,14 @@ class Chat extends VuexModule {
    * socket连接
    */
   @Action
-  protected getSocketIO(): any {
+  protected getSocketIO(): Promise<any> {
     let user = userStore.getUserInfoState;
-    return io.connect(`/?userId=${user.userId}`, {
-      reconnection: true,
+    return new Promise((resolve) => {
+      resolve(
+        io.connect(`/?userId=${user.userId}`, {
+          reconnection: true,
+        })
+      );
     });
   }
   /**
@@ -58,8 +65,7 @@ class Chat extends VuexModule {
   @Action
   async connectSocket() {
     let user = userStore.getUserInfoState;
-    let socket = this.getSocketIO();
-    console.log('socket', socket);
+    let socket = await this.getSocketIO();
     socket.on('connect', async () => {
       console.log('连接成功');
 
@@ -103,6 +109,10 @@ class Chat extends VuexModule {
     });
 
     socket.on('chatData', (res: ServerRes) => {
+      const { createMessage } = useMessage();
+      if (res.code) {
+        return createMessage.error(res.msg);
+      }
       console.log('on chatData', res);
     });
 
@@ -112,6 +122,16 @@ class Chat extends VuexModule {
 
     socket.on('exitFriend', (res: ServerRes) => {
       console.log('on exitFriend', res);
+    });
+  }
+
+  @Action
+  async doPublicBank(groupName: string) {
+    let socket = await this.getSocketIO();
+    socket.emit('addGroup', {
+      userId: userStore.getUserInfoState.userId,
+      groupName: groupName,
+      createTime: new Date().valueOf(),
     });
   }
 }

@@ -61,7 +61,8 @@ import { defineComponent, reactive } from 'vue';
 import { Select, Dropdown, Menu, Modal, Input, Button } from 'ant-design-vue';
 import { PlusCircleOutlined } from '@ant-design/icons-vue';
 import { nameVerify } from '/@/utils/common';
-import { SocketIoLink } from '/@/utils/chat';
+// import { SocketIoLink } from '/@/utils/chat';
+import { chatStore } from '/@/store/chat/chatStore';
 export default defineComponent({
   name: 'ChatSearch',
   components: {
@@ -88,14 +89,17 @@ export default defineComponent({
     };
     const state = reactive(origin);
     function handleSearch() {}
+    /**
+     * 创建群组
+     */
     function addGroup() {
       state.visibleAddGroup = false;
       if (!nameVerify(state.groupName)) {
         state.visibleAddGroup = true;
         return;
       }
-      console.log('state.groupName', state.groupName);
-      SocketIoLink.SocketAddGroup(state.groupName);
+      //   SocketIoLink.SocketAddGroup(state.groupName);
+      chatStore.doPublicBank(state.groupName);
       // 直接处理 创建接口
       //   state.groupName = '';
     }

@@ -8,8 +8,9 @@ export class SocketIoLink {
   /**
    * 创建群
    */
-  static SocketAddGroup(groupName: string) {
-    let socket = chatStore.getSocketIO();
+  static async SocketAddGroup(groupName: string) {
+    let socket = await chatStore.getSocketIO();
+    console.log('user9789879----------', SocketIoLink.user);
     socket.emit('addGroup', {
       userId: SocketIoLink.user.userId,
       groupName: groupName,
