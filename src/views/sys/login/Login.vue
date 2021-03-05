@@ -2,8 +2,8 @@
   <div class="login">
     <div class="login-mask" />
     <div class="login-form-wrap">
-      <div class="login-form mx-6">
-        <div class="login-form__content px-2 py-10">
+      <div class="mx-6 login-form">
+        <div class="px-2 py-10 login-form__content">
           <header>
             <h1>chat-formal</h1>
           </header>
@@ -21,28 +21,28 @@
               force-render
             > </TabPane>
           </Tabs>
-          <a-form
+          <Form
             class="mx-auto mt-10"
             :model="state.formData"
             :rules="state.formRules"
             ref="formRef"
           >
-            <a-form-item name="userName">
+            <FormItem name="userName">
               <a-input
                 size="large"
                 v-model:value="state.formData.userName"
                 placeholder="userName"
               />
-            </a-form-item>
-            <a-form-item name="password">
+            </FormItem>
+            <FormItem name="password">
               <a-input-password
                 size="large"
                 visibilityToggle
                 v-model:value="state.formData.password"
                 placeholder="password"
               />
-            </a-form-item>
-            <a-form-item>
+            </FormItem>
+            <FormItem>
               <a-button
                 type="primary"
                 size="large"
@@ -51,8 +51,8 @@
                 @click="login"
                 :loading="state.loading"
               >{{ state.btnText }}</a-button>
-            </a-form-item>
-          </a-form>
+            </FormItem>
+          </Form>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref, unref } from 'vue';
-import { Checkbox, Tabs } from 'ant-design-vue';
+import { Checkbox, Tabs, Form } from 'ant-design-vue';
 
 import { Button } from '/@/components/Button';
 // import { BasicDragVerify, DragVerifyActionType } from '/@/components/Verify/index';
@@ -77,6 +77,8 @@ export default defineComponent({
     ACheckbox: Checkbox,
     Tabs,
     TabPane: Tabs.TabPane,
+    Form,
+    FormItem: Form.Item,
   },
   setup() {
     const origin = {
@@ -112,7 +114,7 @@ export default defineComponent({
       const form = unref(formRef);
       if (!form) return;
       let data = await form.validate();
-    //   state.loading = true;
+      //   state.loading = true;
       if (state.titleType === 'register') {
         data.createTime = new Date().valueOf();
         try {
@@ -131,7 +133,7 @@ export default defineComponent({
             });
           }
         } catch (e) {
-            state.loading = false;
+          state.loading = false;
           return e;
         } finally {
           state.loading = false;
@@ -148,7 +150,7 @@ export default defineComponent({
               duration: 3,
             });
           } else {
-              createMessage.error('密码错误');
+            createMessage.error('密码错误');
           }
         } catch (error) {
         } finally {

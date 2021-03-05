@@ -1,7 +1,5 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <router-view />
-
+  <RouterView />
 </template>
 
 <script>
@@ -20,7 +18,7 @@ export default defineComponent({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
-//   justify-content: center;
+  //   justify-content: center;
   align-items: center;
   text-align: center;
   height: 100%;

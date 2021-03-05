@@ -3,7 +3,6 @@ import type { ProjectConfig } from '/@/types/config';
 import { MenuTypeEnum, MenuModeEnum, TriggerEnum } from '/@/enums/menuEnum';
 import { CacheTypeEnum } from '/@/enums/cacheEnum';
 import { ContentEnum, PermissionModeEnum, ThemeEnum, RouterTransitionEnum } from '/@/enums/appEnum';
-import { primaryColor } from '../../build/config/lessModifyVars';
 
 // ! You need to clear the browser cache after the change
 const setting: ProjectConfig = {
@@ -18,7 +17,7 @@ const setting: ProjectConfig = {
 
   // color
   // TODO Theme color
-  themeColor: primaryColor,
+  themeColor: '#10B5F0 ',
 
   // Website gray mode, open for possible mourning dates
   grayMode: false,

@@ -11,7 +11,7 @@ import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '../constant';
 /**
  * 获取该目录下所有菜单文件
  */
-import modules from 'globby!/@/router/routes/modules/**/*.@(ts)';
+const modules = import.meta.globEager('./modules/**/*.ts');
 
 /**
  * 获取基础页面路径

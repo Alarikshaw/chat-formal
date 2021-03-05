@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import App from '/@/App.vue';
+import App from './App.vue';
 
 import router, { setupRouter } from '/@/router';
 import { setupAntd } from '/@/setup/ant-design-vue';

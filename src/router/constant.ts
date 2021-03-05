@@ -8,7 +8,6 @@ const EXCEPTION_COMPONENT = () => import('/@/views/sys/exception/Exception.vue')
  * @description: 默认布局 default layout
  */
 export const LAYOUT = () => import('/@/layouts/default/index.vue');
-export const HOME = () => import('/@/views/dashboard/welcome/index.vue');
 
 /**
  * 页面布局
@@ -50,7 +49,7 @@ export const REDIRECT_NAME = 'Redirect';
 export const REDIRECT_ROUTE: AppRouteRecordRaw = {
   path: '/redirect',
   name: REDIRECT_NAME,
-  component: HOME,
+  component: LAYOUT,
   meta: {
     title: REDIRECT_NAME,
     hideBreadcrumb: true,

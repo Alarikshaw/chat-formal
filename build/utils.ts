@@ -102,34 +102,7 @@ export interface ViteEnv {
   VITE_USE_CDN: boolean;
   VITE_DROP_CONSOLE: boolean;
   VITE_BUILD_GZIP: boolean;
-}
-
-// Read all environment variable configuration files to process.env
-export function loadEnv(): ViteEnv {
-  const env = process.env.NODE_ENV;
-  const ret: any = {};
-  const envList = [`.env.${env}.local`, `.env.${env}`, '.env.local', '.env', ,];
-  envList.forEach((e) => {
-    dotenv.config({
-      path: e,
-    });
-  });
-
-  for (const envName of Object.keys(process.env)) {
-    let realName = (process.env as any)[envName].replace(/\\n/g, '\n');
-    realName = realName === 'true' ? true : realName === 'false' ? false : realName;
-    if (envName === 'VITE_PORT') {
-      realName = Number(realName);
-    }
-    if (envName === 'VITE_PROXY') {
-      try {
-        realName = JSON.parse(realName);
-      } catch (error) {}
-    }
-    ret[envName] = realName;
-    process.env[envName] = realName;
-  }
-  return ret;
+  VITE_LEGACY: boolean;
 }
 
 /**
@@ -197,3 +170,24 @@ export function getCwdPath(...dir: string[]) {
 
 // export const run = (bin: string, args: any, opts = {}) =>
 //   execa(bin, args, { stdio: 'inherit', ...opts });
+
+export function wrapperEnv(envConf: Recordable): ViteEnv {
+  const ret: any = {};
+
+  for (const envName of Object.keys(envConf)) {
+    let realName = envConf[envName].replace(/\\n/g, '\n');
+    realName = realName === 'true' ? true : realName === 'false' ? false : realName;
+
+    if (envName === 'VITE_PORT') {
+      realName = Number(realName);
+    }
+    if (envName === 'VITE_PROXY') {
+      try {
+        realName = JSON.parse(realName);
+      } catch (error) {}
+    }
+    ret[envName] = realName;
+    process.env[envName] = realName;
+  }
+  return ret;
+}
