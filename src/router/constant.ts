@@ -27,6 +27,7 @@ export const getParentLayout = (name: string) => {
 export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
   path: '/:path(.*)*',
   name: 'ErrorPage',
+  component: LAYOUT,
   meta: {
     title: 'ErrorPage',
     hideBreadcrumb: true,

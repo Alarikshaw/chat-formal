@@ -49,7 +49,7 @@ class Chat extends VuexModule {
    * socket连接
    */
   @Action
-  protected getSocketIO(): Promise<any> {
+  getSocketIO(): Promise<any> {
     let user = userStore.getUserInfoState;
     return new Promise((resolve) => {
       resolve(
@@ -64,6 +64,7 @@ class Chat extends VuexModule {
    */
   @Action
   async connectSocket() {
+    console.log('------------');
     let user = userStore.getUserInfoState;
     let socket = await this.getSocketIO();
     socket.on('connect', async () => {
@@ -123,6 +124,7 @@ class Chat extends VuexModule {
     socket.on('exitFriend', (res: ServerRes) => {
       console.log('on exitFriend', res);
     });
+    return socket;
   }
 
   @Action

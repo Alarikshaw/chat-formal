@@ -27,8 +27,9 @@ const routeModuleList: AppRouteModule[] = [];
  * 将获得的路由 处理装入容器
  */
 Object.keys(modules).forEach((key) => {
-  const mod = Array.isArray(modules[key]) ? [...modules[key]] : [modules[key]];
-  routeModuleList.push(...mod);
+  const mod = modules[key].default || {};
+  const modList = Array.isArray(mod) ? [...mod] : [mod];
+  routeModuleList.push(...modList);
 });
 
 /**
@@ -39,7 +40,7 @@ export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
 /**
  * 设置根路由
  */
-export const RootToute: AppRouteRecordRaw = {
+export const RootRoute: AppRouteRecordRaw = {
   path: '/',
   name: 'Root',
   redirect: PageEnum.BASE_CHAT,
@@ -62,4 +63,4 @@ export const LoginRoute: AppRouteRecordRaw = {
 /**
  * 导出登录路由、根路由、重新向路由
  */
-export const basicRoutes = [LoginRoute, RootToute, REDIRECT_ROUTE];
+export const basicRoutes = [LoginRoute, RootRoute, REDIRECT_ROUTE];

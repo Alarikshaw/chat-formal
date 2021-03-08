@@ -19,7 +19,7 @@ export const hashRouter = createWebHashHistory();
  */
 const router = createRouter({
   history: hashRouter,
-  routes: basicRoutes as RouteRecordRaw[], // 基础路由，无需权限
+  routes: (basicRoutes as unknown) as RouteRecordRaw[], // 基础路由，无需权限
   strict: true,
   scrollBehavior: scrollBehavior,
 });
