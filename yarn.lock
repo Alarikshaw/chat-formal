@@ -940,9 +940,9 @@
     "@types/mime" "*"
     "@types/node" "*"
 
-"@types/socket.io-client@^1.4.35":
+"@types/socket.io-client@^1.4.33":
   version "1.4.35"
-  resolved "http://118.190.73.84:4873/@types%2fsocket.io-client/-/socket.io-client-1.4.35.tgz#9f3d38b2f548d64beab4510b4eddc5a526b81724"
+  resolved "https://registry.npm.taobao.org/@types/socket.io-client/download/@types/socket.io-client-1.4.35.tgz?cache=0&sync_timestamp=1613386692515&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fsocket.io-client%2Fdownload%2F%40types%2Fsocket.io-client-1.4.35.tgz#9f3d38b2f548d64beab4510b4eddc5a526b81724"
   integrity sha1-nz04svVI1kvqtFELTt3FpSa4FyQ=
 
 "@types/unist@*", "@types/unist@^2.0.0", "@types/unist@^2.0.2":

@@ -1,8 +1,3 @@
-import type {
-  LoginParams,
-  GetUserInfoByUserIdModel,
-  GetUserInfoByUserIdParams,
-} from '/@/api/sys/model/userModel';
 import store from '/@/store/index';
 import io from 'socket.io-client';
 import { setLocal, getLocal, setSession, getSession } from '/@/utils/helper/persistent';
@@ -11,32 +6,14 @@ import { useProjectSetting } from '/@/hooks/setting';
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper';
 import { VuexModule, Module, getModule, Mutation, Action } from 'vuex-module-decorators';
 import { userStore } from '../modules/user';
-
-import { watch } from 'vue';
 const NAME = 'chat';
 hotModuleUnregisterModule(NAME);
-import {
-  SET_SOCKET,
-  SET_DROPPED,
-  SET_ACTIVE_GROUP_USER,
-  ADD_GROUP_MESSAGE,
-  ADD_FRIEND_MESSAGE,
-  SET_FRIEND_MESSAGES,
-  SET_GROUP_GATHER,
-  SET_FRIEND_GATHER,
-  SET_USER_GATHER,
-  SET_ACTIVE_ROOM,
-  DEL_GROUP,
-  DEL_FRIEND,
-  ADD_UNREAD_GATHER,
-} from './mutation-types';
+import { ChatState, RootState } from './mutation-types';
 import { useMessage } from '/@/hooks/web/useMessage';
 const { permissionCacheType } = useProjectSetting();
 function setCache(USER_INFO_KEY: string, info: any) {
   if (!info) return;
-  // const fn = permissionCacheType === CacheTypeEnum.LOCAL ? setLocal : setSession;
   setLocal(USER_INFO_KEY, info, true);
-  // TODO
   setSession(USER_INFO_KEY, info, true);
 }
 function getCache<T>(key: string) {
@@ -44,7 +21,7 @@ function getCache<T>(key: string) {
   return fn(key) as T;
 }
 @Module({ namespaced: true, name: NAME, dynamic: true, store })
-class Chat extends VuexModule {
+class Chat extends VuexModule<ChatState, RootState> {
   /**
    * socket连接
    */
@@ -66,7 +43,11 @@ class Chat extends VuexModule {
   async connectSocket() {
     console.log('------------');
     let user = userStore.getUserInfoState;
-    let socket = await this.getSocketIO();
+    let socket: SocketIOClient.Socket = io.connect(`/?userId=${user.userId}`, {
+      reconnection: true,
+    });
+    console.log('userId', user.userId);
+    console.log('socket', socket);
     socket.on('connect', async () => {
       console.log('连接成功');
 

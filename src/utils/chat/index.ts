@@ -10,7 +10,6 @@ export class SocketIoLink {
    */
   static async SocketAddGroup(groupName: string) {
     let socket = await chatStore.connectSocket();
-    console.log('user9789879----------', SocketIoLink.user);
     socket.emit('addGroup', {
       userId: SocketIoLink.user.userId,
       groupName: groupName,
