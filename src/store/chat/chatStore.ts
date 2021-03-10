@@ -48,6 +48,7 @@ class Chat extends VuexModule<ChatState, RootState> {
     });
     console.log('userId', user.userId);
     console.log('socket', socket);
+    socket.connected = true;
     socket.on('connect', async () => {
       console.log('连接成功');
 

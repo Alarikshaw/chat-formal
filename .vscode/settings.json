@@ -59,22 +59,21 @@
   "files.trimFinalNewlines": true,
   "files.eol": "\n",
   "search.exclude": {
-    // 搜索排除这些区域
-    "**/node_modules": true,
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.gitignore": true,
+    "**/.idea": true,
+    "**/.svn": true,
+    "**/.vscode": false,
     "**/*.log": true,
     "**/*.log*": true,
     "**/bower_components": true,
     "**/dist": true,
     "**/elehukouben": true,
-    "**/.git": true,
-    "**/.gitignore": true,
-    "**/.svn": true,
-    "**/.DS_Store": true,
-    "**/.idea": true,
-    "**/.vscode": false,
-    "**/yarn.lock": true,
-    "**/tmp": true
-  },
+    "**/node_modules": false,
+    "**/tmp": true,
+    "**/yarn.lock": true
+},
   "files.exclude": {
     // 排除文件搜索区域，比如node_modules(默认设置已经屏蔽了)
     // "**/node_modules": true,

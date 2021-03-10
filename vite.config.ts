@@ -23,6 +23,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
   const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE, VITE_LEGACY } = viteEnv;
+  console.log('VITE_PROXY', VITE_PROXY);
+  console.log('createProxy(VITE_PROXY)', createProxy(VITE_PROXY));
   const isBuild = command === 'build';
   return {
     base: VITE_PUBLIC_PATH,
@@ -44,7 +46,18 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       port: VITE_PORT,
       // Load proxy configuration from .env
-      proxy: createProxy(VITE_PROXY),
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3000',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+        'socket.io': {
+          target: 'http://localhost:3000',
+          changeOrigin: true,
+          ws: true,
+        },
+      },
       hmr: {
         overlay: true,
       },
@@ -94,6 +107,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'moment/dist/locale/zh-cn',
         'ant-design-vue/es/locale/en_US',
         'moment/dist/locale/eu',
+        'socket.io-client',
       ],
       exclude: ['vue-demi'],
     },
